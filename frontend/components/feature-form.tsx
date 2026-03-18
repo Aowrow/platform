@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 
 type FeatureField = {
   key: string;
@@ -30,7 +30,17 @@ type FeatureTask = {
   status: string;
   progress: number;
   title?: string | null;
+  bizType?: string;
   resultSummary?: ResultSummary | null;
+};
+
+type AssetItem = {
+  id: string;
+  assetType: string;
+  mediaType: string;
+  fileName: string;
+  taskId: string | null;
+  url: string;
 };
 
 type FeatureData = {
@@ -67,12 +77,66 @@ export function FeatureForm({ feature, initialTasks }: Props) {
   const [message, setMessage] = useState('');
   const [selectedTask, setSelectedTask] = useState<FeatureTask | null>(initialTasks[0] ?? null);
   const pollingRef = useRef<number | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadedAssets, setUploadedAssets] = useState<Array<{ id: string; fileName: string; url: string }>>([]);
+  const [taskAssets, setTaskAssets] = useState<Record<string, AssetItem[]>>({});
 
   function updateValue(key: string, value: string) {
     setValues((prev) => ({
       ...prev,
       [key]: value
     }));
+  }
+
+  async function loadAssetsByTask(taskId: string) {
+    const response = await fetch(`${apiBaseUrl}/assets`, { cache: 'no-store' });
+    if (!response.ok) {
+      return [] as AssetItem[];
+    }
+
+    const allAssets = (await response.json()) as AssetItem[];
+    return allAssets.filter((asset) => asset.taskId === taskId && asset.mediaType === 'image');
+  }
+
+  async function handleFileUpload(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) {
+      return;
+    }
+
+    setUploading(true);
+    setMessage('');
+
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const response = await fetch(`${apiBaseUrl}/assets/upload`, {
+        method: 'POST',
+        body: formData
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || '图片上传失败');
+      }
+
+      const asset = await response.json();
+      setUploadedAssets((prev) => [
+        {
+          id: String(asset.id),
+          fileName: asset.fileName,
+          url: asset.url
+        },
+        ...prev
+      ]);
+      setMessage('图片已上传到 MinIO，并写入资产管理。');
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : '图片上传失败');
+    } finally {
+      setUploading(false);
+      event.target.value = '';
+    }
   }
 
   useEffect(() => {
@@ -98,7 +162,9 @@ export function FeatureForm({ feature, initialTasks }: Props) {
       }
 
       const latestTasks = (await response.json()) as FeatureTask[];
-      const filteredTasks = latestTasks.filter((task) => task.status && task.taskNo && task.id).filter((task: any) => task.bizType === feature.code);
+      const filteredTasks = latestTasks
+        .filter((task) => task.status && task.taskNo && task.id)
+        .filter((task) => task.bizType === feature.code);
       setTasks(filteredTasks);
     }
 
@@ -125,6 +191,22 @@ export function FeatureForm({ feature, initialTasks }: Props) {
       }
     };
   }, [tasks, feature.code]);
+
+  useEffect(() => {
+    async function syncSelectedTaskAssets() {
+      if (!selectedTask?.id) {
+        return;
+      }
+
+      const assets = await loadAssetsByTask(selectedTask.id);
+      setTaskAssets((prev) => ({
+        ...prev,
+        [selectedTask.id]: assets
+      }));
+    }
+
+    void syncSelectedTaskAssets();
+  }, [selectedTask?.id]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -155,6 +237,7 @@ export function FeatureForm({ feature, initialTasks }: Props) {
         status: createdTask.status,
         progress: createdTask.progress,
         title: createdTask.title,
+        bizType: createdTask.bizType,
         resultSummary: createdTask.resultSummary ?? null
       };
 
@@ -176,6 +259,30 @@ export function FeatureForm({ feature, initialTasks }: Props) {
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Feature Form</p>
             <h3 className="mt-3 text-2xl font-semibold text-ink">{feature.name}</h3>
             <p className="mt-2 text-sm leading-6 text-slate-500">{feature.description}</p>
+          </div>
+
+          <div className="mb-6 rounded-2xl bg-slate-50 p-4">
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+              <div>
+                <p className="text-sm font-medium text-ink">上传参考图片</p>
+                <p className="mt-1 text-xs leading-5 text-slate-500">上传后的图片会进入 MinIO，并在资产管理页可见。</p>
+              </div>
+              <label className="inline-flex cursor-pointer items-center rounded-2xl bg-brand px-4 py-3 text-sm font-medium text-white transition hover:bg-blue-700">
+                {uploading ? '上传中...' : '上传图片'}
+                <input type="file" accept="image/*" className="hidden" onChange={handleFileUpload} />
+              </label>
+            </div>
+            {uploadedAssets.length > 0 ? (
+              <div className="mt-4 grid gap-3 md:grid-cols-2">
+                {uploadedAssets.slice(0, 4).map((asset) => (
+                  <div key={asset.id} className="flex items-center gap-3 rounded-2xl bg-white p-3">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={asset.url} alt={asset.fileName} className="h-14 w-14 rounded-xl object-cover" />
+                    <p className="truncate text-sm text-slate-600">{asset.fileName}</p>
+                  </div>
+                ))}
+              </div>
+            ) : null}
           </div>
 
           <div className="grid gap-4">
@@ -289,6 +396,23 @@ export function FeatureForm({ feature, initialTasks }: Props) {
         ) : (
           <div className="mt-6 grid min-w-0 gap-6 xl:grid-cols-[0.85fr_1.15fr]">
             <div className="space-y-4">
+              <div className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-600">
+                <p className="font-medium text-ink">任务结果图片</p>
+                <div className="mt-4 grid gap-3 md:grid-cols-2">
+                  {(taskAssets[selectedTask.id] || []).length === 0 ? (
+                    <p className="text-slate-400">当前任务还没有同步到平台资产中的结果图片。</p>
+                  ) : (
+                    taskAssets[selectedTask.id].map((asset) => (
+                      <div key={asset.id} className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={asset.url} alt={asset.fileName} className="h-40 w-full object-cover" />
+                        <div className="p-3 text-xs text-slate-500">{asset.fileName}</div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+
               <div className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-600">
                 <div className="flex items-center justify-between">
                   <span>状态</span>

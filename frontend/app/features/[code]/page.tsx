@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { PageHeader } from '@/components/page-header';
 import { FeatureForm } from '@/components/feature-form';
+import { getFrontendFeature } from '@/lib/feature-catalog';
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001/api';
 
@@ -32,11 +33,20 @@ async function getTasks(code: string) {
 
 export default async function FeaturePage({ params }: { params: Promise<{ code: string }> }) {
   const resolvedParams = await params;
-  const feature = await getFeature(resolvedParams.code);
-
-  if (!feature) {
+  if (!resolvedParams?.code) {
     notFound();
   }
+  const localFeature = getFrontendFeature(resolvedParams.code);
+  if (!localFeature) {
+    notFound();
+  }
+
+  const remoteFeature = await getFeature(resolvedParams.code);
+  const feature = {
+    ...localFeature,
+    ...(remoteFeature || {}),
+    fields: Array.isArray(remoteFeature?.fields) ? remoteFeature.fields : localFeature.fields
+  };
 
   const tasks = await getTasks(resolvedParams.code);
 

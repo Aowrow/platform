@@ -1,16 +1,23 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import { lookup as getMimeType } from 'mime-types';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { ComfyuiService } from '../comfyui/comfyui.service';
 import { CreateFeatureTaskDto } from '../features/dto/create-feature-task.dto';
 import { getFeatureDefinition, loadFeatureWorkflow } from '../features/feature-registry';
+import { StorageService } from '../storage/storage.service';
+import { AssetsService } from '../assets/assets.service';
 
 @Injectable()
 export class TasksService {
   constructor(
     private readonly prisma: PrismaService,
-    private readonly comfyuiService: ComfyuiService
+    private readonly comfyuiService: ComfyuiService,
+    private readonly storageService: StorageService,
+    private readonly assetsService: AssetsService
   ) {}
 
   private serializeTask(task: any) {
@@ -135,6 +142,10 @@ export class TasksService {
           success ? 'success' : 'failed'
         );
 
+        if (success) {
+          await this.syncGeneratedAssets(taskId, historyRecord);
+        }
+
         return;
       }
 
@@ -184,6 +195,59 @@ export class TasksService {
       { promptId } as Prisma.InputJsonValue,
       'failed'
     );
+  }
+
+  private async syncGeneratedAssets(taskId: bigint, historyRecord: any) {
+    const task = await this.prisma.tasks.findUnique({
+      where: { id: taskId },
+      select: { userId: true }
+    });
+
+    if (!task) {
+      return;
+    }
+
+    const outputs = historyRecord?.outputs || {};
+    const outputEntries = Object.values(outputs as Record<string, any>);
+    const files = outputEntries.flatMap((entry: any) => [...(entry?.images || []), ...(entry?.gifs || []), ...(entry?.videos || [])]);
+    const outputDir = process.env.COMFYUI_OUTPUT_DIR || 'D:/ComfyUI/output';
+
+    for (const file of files) {
+      const filename = file?.filename;
+      if (!filename) {
+        continue;
+      }
+
+      const subfolder = file?.subfolder || '';
+      const localPath = subfolder ? join(outputDir, subfolder, filename) : join(outputDir, filename);
+      const buffer = await readFile(localPath);
+      const objectKey = `generated/${taskId.toString()}/${filename}`;
+      const mimeType = String(getMimeType(filename) || 'application/octet-stream');
+
+      await this.storageService.uploadBuffer(objectKey, buffer, {
+        'Content-Type': mimeType
+      });
+
+      const existingAsset = await this.prisma.assets.findFirst({
+        where: {
+          taskId,
+          objectKey
+        }
+      });
+
+      if (!existingAsset) {
+        await this.assetsService.createAssetRecord({
+          userId: task.userId,
+          taskId,
+          assetType: 'output',
+          mediaType: mimeType.startsWith('image/') ? 'image' : mimeType.startsWith('video/') ? 'video' : 'image',
+          objectKey,
+          fileName: filename,
+          mimeType,
+          fileSize: BigInt(buffer.length)
+        });
+      }
+    }
   }
 
   private async getDefaultUser() {

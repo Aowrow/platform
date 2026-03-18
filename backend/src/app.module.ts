@@ -7,11 +7,13 @@ import { SystemModule } from './modules/system/system.module';
 import { ComfyuiModule } from './modules/comfyui/comfyui.module';
 import { PrismaModule } from './modules/prisma/prisma.module';
 import { FeaturesModule } from './modules/features/features.module';
+import { StorageModule } from './modules/storage/storage.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     PrismaModule,
+    StorageModule,
     HealthModule,
     FeaturesModule,
     TasksModule,

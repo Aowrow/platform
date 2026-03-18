@@ -1,5 +1,6 @@
 import { PageHeader } from '@/components/page-header';
 import { FeatureCard } from '@/components/feature-card';
+import { featureCatalog } from '@/lib/feature-catalog';
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001/api';
 
@@ -20,7 +21,8 @@ async function getFeatures() {
 }
 
 export default async function HomePage() {
-  const features = await getFeatures();
+  const remoteFeatures = await getFeatures();
+  const features = remoteFeatures.length > 0 ? remoteFeatures : featureCatalog;
 
   return (
     <div>
