@@ -1,0 +1,140 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id          BigInt      @id @default(autoincrement())
+  username    String      @unique @db.VarChar(64)
+  passwordHash String     @map("password_hash") @db.VarChar(255)
+  nickname    String      @db.VarChar(64)
+  email       String?     @db.VarChar(128)
+  mobile      String?     @db.VarChar(32)
+  status      Int         @default(1) @db.TinyInt
+  lastLoginAt DateTime?   @map("last_login_at")
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime    @updatedAt @map("updated_at")
+  tasks       tasks[]
+  assets      assets[]
+  userRoles   user_roles[]
+
+  @@map("users")
+}
+
+model roles {
+  id          BigInt       @id @default(autoincrement())
+  code        String       @unique @db.VarChar(64)
+  name        String       @db.VarChar(64)
+  description String?      @db.VarChar(255)
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+  userRoles   user_roles[]
+
+  @@map("roles")
+}
+
+model user_roles {
+  id        BigInt   @id @default(autoincrement())
+  userId    BigInt   @map("user_id")
+  roleId    BigInt   @map("role_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  user      users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      roles    @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, roleId])
+  @@map("user_roles")
+}
+
+model tasks {
+  id                BigInt      @id @default(autoincrement())
+  taskNo            String      @unique @map("task_no") @db.VarChar(64)
+  userId            BigInt      @map("user_id")
+  taskType          String      @map("task_type") @db.VarChar(32)
+  bizType           String      @map("biz_type") @db.VarChar(64)
+  title             String?     @db.VarChar(128)
+  status            String      @db.VarChar(32)
+  progress          Int         @default(0)
+  inputParams       Json        @map("input_params")
+  comfyServer       String?     @map("comfy_server") @db.VarChar(255)
+  comfyWorkflowName String?     @map("comfy_workflow_name") @db.VarChar(128)
+  comfyTaskId       String?     @map("comfy_task_id") @db.VarChar(128)
+  resultSummary     Json?       @map("result_summary")
+  errorMessage      String?     @map("error_message") @db.Text
+  startedAt         DateTime?   @map("started_at")
+  finishedAt        DateTime?   @map("finished_at")
+  createdAt         DateTime    @default(now()) @map("created_at")
+  updatedAt         DateTime    @updatedAt @map("updated_at")
+  user              users       @relation(fields: [userId], references: [id])
+  assets            assets[]
+  taskLogs          task_logs[]
+
+  @@index([userId])
+  @@index([status])
+  @@index([taskType])
+  @@index([bizType])
+  @@index([createdAt])
+  @@index([userId, createdAt])
+  @@map("tasks")
+}
+
+model task_logs {
+  id        BigInt    @id @default(autoincrement())
+  taskId    BigInt    @map("task_id")
+  logType   String    @map("log_type") @db.VarChar(32)
+  status    String?   @db.VarChar(32)
+  message   String    @db.VarChar(500)
+  detail    Json?
+  createdAt DateTime  @default(now()) @map("created_at")
+  task      tasks     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@index([taskId])
+  @@index([logType])
+  @@index([createdAt])
+  @@index([taskId, createdAt])
+  @@map("task_logs")
+}
+
+model assets {
+  id              BigInt    @id @default(autoincrement())
+  userId          BigInt    @map("user_id")
+  taskId          BigInt?   @map("task_id")
+  assetType       String    @map("asset_type") @db.VarChar(32)
+  mediaType       String    @map("media_type") @db.VarChar(32)
+  storageProvider String    @map("storage_provider") @db.VarChar(32)
+  bucketName      String?   @map("bucket_name") @db.VarChar(128)
+  objectKey       String    @map("object_key") @db.VarChar(500)
+  fileName        String    @map("file_name") @db.VarChar(255)
+  mimeType        String?   @map("mime_type") @db.VarChar(128)
+  fileSize        BigInt?   @map("file_size")
+  width           Int?
+  height          Int?
+  duration        Decimal?  @db.Decimal(10, 2)
+  sortOrder       Int       @default(0) @map("sort_order")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+  user            users     @relation(fields: [userId], references: [id])
+  task            tasks?    @relation(fields: [taskId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([taskId])
+  @@index([assetType])
+  @@index([mediaType])
+  @@index([taskId, assetType])
+  @@map("assets")
+}
+
+model system_configs {
+  id          BigInt   @id @default(autoincrement())
+  configKey   String   @unique @map("config_key") @db.VarChar(128)
+  configValue String   @map("config_value") @db.Text
+  valueType   String   @default("string") @map("value_type") @db.VarChar(32)
+  description String?  @db.VarChar(255)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("system_configs")
+}

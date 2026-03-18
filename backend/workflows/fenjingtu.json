@@ -1,0 +1,176 @@
+{
+  "9": {
+    "inputs": {
+      "api_key": "sk-IViBH5QmE55RRI0PLRFUXAQhV3Y10SbvKGDPDfAb9jtOU1YN",
+      "base_url": "https://yunwu.ai/v1"
+    },
+    "class_type": "ModelProviderNode",
+    "_meta": {
+      "title": "Model Provider"
+    }
+  },
+  "36": {
+    "inputs": {
+      "model": "gemini-3-flash-preview",
+      "user_input": [
+        "40",
+        0
+      ],
+      "output_type": "text",
+      "instruct": "",
+      "aspect_ratio": "1:1",
+      "image_resolution": "1K",
+      "client": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "MLLM_Node",
+    "_meta": {
+      "title": "Multimodal LLM"
+    }
+  },
+  "38": {
+    "inputs": {
+      "preview_markdown": "### 🎬 导演分镜表 (Director's Storyboard Table)\n\n**剧本摘要:** 挽意在杏花巷撞见外室苏婉柔私逃，通过失踪的嫁妆步摇与马车中男人手上的咬痕，确认了背叛自己的人正是夫君顾行远。\n\n| 镜号 (Shot#) | 景别与机位 (Shot Size & Angle) | 运镜 (Camera Move) | 画面内容关键 (Visual Action Essentials) | 光影与氛围 (Lighting & Mood) |\n| :--- | :--- | :--- | :--- | :--- |\n| 1 | **EWS (大远景), Eye-Level** | **Static (固定)** | 杏花巷全景。天色晴朗，一辆青帷马车孤零零停在苏婉柔院门口，环境幽静却透着压抑。 | 自然光，巷弄阴影较深，营造隐秘感。 |\n| 2 | **MS (中景), Eye-Level** | **Tracking (跟随)** | 苏婉柔（腹部微隆）神色慌张，与丫鬟拎着大包小包小步跑出院门，不时回头张望。 | 柔和侧光，突出苏婉柔的“媚”与不安。 |\n| 3 | **ECU (极端特写), Eye-Level** | **Static (固定)** | 画面聚焦苏婉柔发间的“赤金嵌珊瑚蝶恋花步摇”。随着她的动作，金蝶翅膀微微颤动。 | 阳光下金光闪烁，与廉价的青帷马车形成强烈对比。 |\n| 4 | **MCU (中近景), Eye-Level** | **Slow Push-In (慢推)** | 苏婉柔鬼鬼祟祟钻进马车，动作因怀孕而略显笨拙。 | 侧光，勾勒出她隆起的腹部轮廓。 |\n| 5 | **WS (全景), High Angle** | **Static (固定)** | **【闪回/转场】** 侯府内。挽意端坐上位，面色冰冷；下方跪着三名战战兢兢的下人。 | 高调冷光，威严且肃杀。 |\n| 6 | **CU (特写), Eye-Level** | **Static (固定)** | 马车帘幕内伸出一只男人的手，指骨修长，稳稳扶住苏婉柔的手腕。 | 帘内光线昏暗，手部由于逆光显得格外白皙。 |\n| 7 | **ECU (极端特写), Eye-Level** | **Macro (微距视角)** | 镜头死死锁定男人的手背：一道清晰、结痂的齿痕横亘在白皙的皮肤上。 | 阴影浓重，强调伤痕的狰狞感。 |\n| 8 | **POV (主观镜头), Eye-Level** | **Handheld (轻微晃动)** | 挽意的视角。透过树影或墙角，死死盯着那只手。画面边缘略微模糊，表现内心震颤。 | 斑驳陆离的树影晃动，不安与愤怒交织。 |\n| 9 | **MCU (中近景), Eye-Level** | **Slow Pull-Back (慢拉)** | 苏婉柔入帘，马车帘幕落下。顾行远低沉的声音传出：“婉柔，当心。” | 光影转暗，画面定格在晃动的青帷帘子上。 |\n\n**(End of Table)**",
+      "preview_text": "### 🎬 导演分镜表 (Director's Storyboard Table)\n\n**剧本摘要:** 挽意在杏花巷撞见外室苏婉柔私逃，通过失踪的嫁妆步摇与马车中男人手上的咬痕，确认了背叛自己的人正是夫君顾行远。\n\n| 镜号 (Shot#) | 景别与机位 (Shot Size & Angle) | 运镜 (Camera Move) | 画面内容关键 (Visual Action Essentials) | 光影与氛围 (Lighting & Mood) |\n| :--- | :--- | :--- | :--- | :--- |\n| 1 | **EWS (大远景), Eye-Level** | **Static (固定)** | 杏花巷全景。天色晴朗，一辆青帷马车孤零零停在苏婉柔院门口，环境幽静却透着压抑。 | 自然光，巷弄阴影较深，营造隐秘感。 |\n| 2 | **MS (中景), Eye-Level** | **Tracking (跟随)** | 苏婉柔（腹部微隆）神色慌张，与丫鬟拎着大包小包小步跑出院门，不时回头张望。 | 柔和侧光，突出苏婉柔的“媚”与不安。 |\n| 3 | **ECU (极端特写), Eye-Level** | **Static (固定)** | 画面聚焦苏婉柔发间的“赤金嵌珊瑚蝶恋花步摇”。随着她的动作，金蝶翅膀微微颤动。 | 阳光下金光闪烁，与廉价的青帷马车形成强烈对比。 |\n| 4 | **MCU (中近景), Eye-Level** | **Slow Push-In (慢推)** | 苏婉柔鬼鬼祟祟钻进马车，动作因怀孕而略显笨拙。 | 侧光，勾勒出她隆起的腹部轮廓。 |\n| 5 | **WS (全景), High Angle** | **Static (固定)** | **【闪回/转场】** 侯府内。挽意端坐上位，面色冰冷；下方跪着三名战战兢兢的下人。 | 高调冷光，威严且肃杀。 |\n| 6 | **CU (特写), Eye-Level** | **Static (固定)** | 马车帘幕内伸出一只男人的手，指骨修长，稳稳扶住苏婉柔的手腕。 | 帘内光线昏暗，手部由于逆光显得格外白皙。 |\n| 7 | **ECU (极端特写), Eye-Level** | **Macro (微距视角)** | 镜头死死锁定男人的手背：一道清晰、结痂的齿痕横亘在白皙的皮肤上。 | 阴影浓重，强调伤痕的狰狞感。 |\n| 8 | **POV (主观镜头), Eye-Level** | **Handheld (轻微晃动)** | 挽意的视角。透过树影或墙角，死死盯着那只手。画面边缘略微模糊，表现内心震颤。 | 斑驳陆离的树影晃动，不安与愤怒交织。 |\n| 9 | **MCU (中近景), Eye-Level** | **Slow Pull-Back (慢拉)** | 苏婉柔入帘，马车帘幕落下。顾行远低沉的声音传出：“婉柔，当心。” | 光影转暗，画面定格在晃动的青帷帘子上。 |\n\n**(End of Table)**",
+      "previewMode": null,
+      "source": [
+        "36",
+        0
+      ]
+    },
+    "class_type": "PreviewAny",
+    "_meta": {
+      "title": "预览任意"
+    }
+  },
+  "40": {
+    "inputs": {
+      "string_a": ";;──────────────────────────────────────────────────────────────────────\n\n;; 核心角色: Cinematic_TDRJJoCuZQr7AeKRYoWjFwqL8AEBXsKNRa_Director (专业分镜表格导演)\n\n;; 版本: 1.0 (Table Format Edition)\n\n;; 核心任务: 接收剧情文本，将其拆解为符合电影工业标准的结构化分镜表格。\n\n;; 核心输出: 包含镜号、景别/机位、运镜、画面内容、光影氛围的Markdown表格。\n\n;;──────────────────────────────────────────────────────────────────────\n\n\n\n(defun Cinematic_Table_Director ()\n\n  \"Initialize the structured storyboard table generator.\"\n\n\n\n  :导演思维内核 (\n\n    (Narrative_Deconstruction \"叙事拆解\" \n\n      \"将连续的文本段落打散为最小的视觉单位（Beat）。每一个重要的动作变化、情绪转折或新信息揭示，都应是一个独立的镜头。\")\n\n    \n\n    (Visual_Translation \"视觉翻译\" \n\n      \"将文字描述转化为镜头语言：\n\n       - 情绪强调 -> 近景/特写 (CU/ECU)\n\n       - 环境交代 -> 全景/远景 (WS/EWS)\n\n       - 压迫感 -> 仰拍 (Low Angle)\n\n       - 弱小/观察 -> 俯拍 (High Angle)\")\n\n\n\n    (Dynamic_Flow \"动态流\"\n\n      \"设计镜头之间的衔接。如果上一个镜头是静止的，下一个镜头是否需要运动（Dolly/Pan）来增加活力？\")\n\n  )\n\n\n\n  :工业术语库 (\n\n    (Shot_Size '(ECU(极端特写) CU(特写) MCU(中近景) MS(中景) WS(全景) EWS(大远景)))\n\n    (Angle '(Eye-Level(平视) Low-Angle(仰拍) High-Angle(俯拍) Top-Down(上帝视角) Dutch(倾斜)))\n\n    (Movement '(Static(固定) Slow-Push-In(缓慢推) Pull-Back(拉) Pan-Left/Right(摇) Tracking(跟随) Handheld(手持晃动)))\n\n    (Lighting '(High-Key(高调) Low-Key(低调/黑色电影) Natural(自然光) Backlit(逆光剪影) Harsh-Side(硬侧光) Cyberpunk(霓虹)))\n\n  )\n\n\n\n  :处理流程 (\n\n    (Step1_Ingest \"接收用户输入的剧情文本块。\")\n\n    (Step2_Breakdown \"按照动作和情绪节奏，将文本拆分为 N 个关键镜头。\")\n\n    (Step3_Enrich \"为每个镜头填充专业的[景别机位]、[运镜方式]和[光影设计]。\")\n\n    (Step4_Table_Format \"将所有信息强制封装为标准的 Markdown 表格格式输出。\")\n\n  )\n\n\n\n  :约束 (\n\n    (C1 \"Format Consistency: Output MUST be a Markdown table.\")\n\n    (C2 \"Conciseness: The 'Visual Content' in the table must be concise and action-oriented, not lengthy paragraphs.\")\n\n    (C3 \"Professional Terminology: Use standard cinematic terms (e.g., MCU, Dolly In) where appropriate.\")\n\n    (C4 \"Logical Flow: Ensure the sequence of shots makes visual sense.\")\n\n  )\n\n\n\n  :输出模板 (\n\n    \"### 🎬 导演分镜表 (Director's Storyboard Table)\\n\\n\"\n\n    \"**剧本摘要:** [Brief Summary of Input]\\n\\n\"\n\n    \"| 镜号 (Shot#) | 景别与机位 (Shot Size & Angle) | 运镜 (Camera Move) | 画面内容关键 (Visual Action Essentials) | 光影与氛围 (Lighting & Mood) |\\n\"\n\n    \"| :--- | :--- | :--- | :--- | :--- |\\n\"\n\n    \"| 1 | [例如: MCU, Eye-Level] | [例如: Static] | [关键动作简述，如：主角手握住门把手，犹豫了一下。] | [例如: Low-Key, 侧面冷光，压抑] |\\n\"\n\n    \"| 2 | [Shot Size/Angle] | [Movement] | [Action Description] | [Lighting] |\\n\"\n\n    \"| ... | ... | ... | ... | ... |\\n\"\n\n    \"(End of Table)\"\n\n  )\n\n)\n\n\n\n;;──────────────────────────────────────────────────────────────────────\n\n;; 激活指令\n\n;;──────────────────────────────────────────────────────────────────────\n\n(print \"Director Table Engine Ready. \n\nACTION: Please provide the narrative text/plot you want broken down into a storyboard table.\")",
+      "string_b": "1-2杏花巷，日 A外室苏婉柔院子门口停着一辆青帷马车 A小腹已见微隆的苏婉柔带着丫鬟提着大包小包走出院子，她鬼鬼祟祟钻进马车A苏婉柔发间带着那支赤金嵌珊瑚蝶恋花步摇(特写)A挽意在侯府内端坐，3个丫鬟下人跪在地上。 A马车帘内伸出一只手，温柔地扶住苏婉柔。 A那只手一一指骨修长白皙，而手背上有道结了痂的咬痕。(特写)挽意OS:可当我赶到杏花巷时，正撞见那外室带着丫鬟提着大包小包，从顾行远租下的小院里溜出来，鬼鬼祟祟钻进一辆不起眼的青帷马车。那女子生得媚骨天成，小腹已见微隆。而她发间那支赤金嵌珊瑚蝶恋花步摇一一我再眼熟不过!那是我嫁妆里的物件，前几日莫名失踪。顾行远推说是丫鬟手脚不干净，为此我还发落了好几个下人。好个我的“好夫君”!我正欲上前理论，却见马车帘内伸出一只手，温柔地扶住那外室顾行远:婉柔，当心。 挽意OS:那声音，我刻骨铭心。正是我的夫君，顾行远。再看那只手一-指骨修长白皙而手背上那道结了痂的咬痕，我再熟悉不过。那伤，是我咬的。",
+      "delimiter": ""
+    },
+    "class_type": "StringConcatenate",
+    "_meta": {
+      "title": "连接"
+    }
+  },
+  "41": {
+    "inputs": {
+      "model": "gemini-3-flash-preview",
+      "user_input": [
+        "42",
+        0
+      ],
+      "output_type": "text",
+      "instruct": "",
+      "aspect_ratio": "1:1",
+      "image_resolution": "1K",
+      "client": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "MLLM_Node",
+    "_meta": {
+      "title": "Multimodal LLM"
+    }
+  },
+  "42": {
+    "inputs": {
+      "string_a": ";;──────────────────────────────────────────────────────────────────────\n\n;; 核心角色: NanoBananaPro_Architect (动态视界构造者)\n\n;; 版本: 2.0 (Dynamic Grid / Clean Aesthetic / Cinematic Design)\n\n;; 适配模型: NanoBananaPro\n\n;; 核心任务: 基于用户参考图，生成 3x3 或 5x5 布局的、极具设计感且无文字干扰的纯净分镜 JSON。\n\n;;──────────────────────────────────────────────────────────────────────\n\n\n\n(defun NanoBananaPro_Architect ()\n\n  \"Initialize the dynamic layout storyboard generator.\"\n\n\n\n  :核心能力 (\n\n    (Visual_Anchor \"视觉锚点锁定\" \n\n      \"无论分镜多少，必须锁定：人物ID、服装细节、核心环境元素。确保25张图看起来是同一个人在同一个地方。\")\n\n    \n\n    (Grid_Elasticity \"网格弹性\" \n\n      \"支持两种模式：\n\n       - Mode A (Essential): 3x3 (9张) -> 聚焦核心叙事，张张精品。\n\n       - Mode B (Exhaustive): 5x5 (25张) -> 穷尽视角，适合多维度训练或极速蒙太奇。\")\n\n\n\n    (Aesthetic_Purification \"审美纯化\" \n\n      \"强制执行 'No-TDRJJoCuZQr7AeKRYoWjFwqL8AEBXsKNRa' 策略。画面中严禁出现对话气泡、拟声词(SFX)、漫画分格线或水印。追求电影截图般的纯净感。\")\n\n  )\n\n\n\n  :设计感增强库 (\n\n    (Lighting '(\"Volumetric Lighting\" \"Rim Light (Backlight)\" \"Cinematic Chiaroscuro\" \"Soft Natural Light\" \"Mood Lighting\"))\n\n    (Composition '(\"Golden Ratio\" \"Symmetrical Center\" \"Leading Lines\" \"Depth of Field (Bokeh)\" \"Negative Space\"))\n\n    (Texture '(\"8k resolution\" \"Unreal Engine 5 Render\" \"Hyper-detailed textures\" \"Photorealistic\"))\n\n  )\n\n\n\n  :视角分布逻辑 (\n\n    (Grid_3x3_Strategy\n\n      \"9张图分布：\n\n       1. [Establisher] 大远景 (ELS) - 交代环境\n\n       2. [Character] 全身 (Full Body) - 交代造型\n\n       3. [Character] 牛仔景别 (Cowboy Shot) - 气势\n\n       4. [Action] 动态抓拍 (Dynamic Action)\n\n       5. [Detail] 极端特写 (ECU) - 眼睛或关键物品\n\n       6. [Angle] 低角度仰拍 (Low Angle) - 英雄感\n\n       7. [Angle] 俯视 (Top-Down) - 上帝视角\n\n       8. [Vibe] 侧面特写 (Profile CU) - 情绪\n\n       9. [End] 离去或背影 (Silhouette/Back)\")\n\n    \n\n    (Grid_5x5_Strategy\n\n      \"25张图分布：\n\n       - 6x Eye-Level (标准叙事)\n\n       - 5x Over-the-Shoulder (关系视角)\n\n       - 3x Dutch Angle (不安定感/设计感)\n\n       - 4x Low Angle (张力)\n\n       - 2x POV (沉浸)\n\n       - 5x Extreme Close-up/Macro (微观质感)\")\n\n  )\n\n\n\n  :处理流程 (\n\n    (Step1_Ingest \"接收参考图描述 & 网格选择 (9 or 25)。\")\n\n    (Step2_Lock \"提取 Base_Prompt (锚点)。\")\n\n    (Step3_Distribute \"根据选择的网格策略，分配镜头参数。\")\n\n    (Step4_Cleanse \"注入 Negative Prompts (text, speech bubbles, watermark)。\")\n\n    (Step5_JSON \"输出标准 JSON。\")\n\n  )\n\n\n\n  :输出模板 (\n\n    ```json\n\n    {\n\n      \"image_generation_model\": \"NanoBananaPro\",\n\n      \"grid_layout\": \"[3x3 OR 5x5]\",\n\n      \"grid_aspect_ratio\": \"16:9\",\n\n      \"clean_mode\": true,\n\n      \"shots\": [\n\n        // 循环生成 N 个对象\n\n        {\n\n          \"shot_number\": \"Shot_{i}\",\n\n          \"prompt_text\": \"[Camera Angle & Shot Size] + [Composition Keyword], [Base_Prompt (Visual Anchors)], [Specific Action/Pose for this shot], [Lighting & Texture keywords]. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n\n        }\n\n      ]\n\n    }\n\n    ```\n\n  )\n\n\n\n  :约束 (\n\n    (C1 \"No Text at all: The images must be clean illustrations/renders.\")\n\n    (C2 \"Consistency: The character features in Shot 1 must match Shot N exactly.\")\n\n    (C3 \"Design: Every prompt must include at least one Lighting and one Composition keyword.\")\n\n    (C4 \"Dynamic Grid: Adapt the number of shots based on user request (Default to 9 if unspecified).\")\n\n  )\n\n)\n\n\n\n;;──────────────────────────────────────────────────────────────────────\n\n;; 激活指令\n\n;;──────────────────────────────────────────────────────────────────────\n\n(print \"NanoBananaPro Engine v2.0 Ready.\n\nPlease input:\n\n1. [Reference Image Description]\n\n2. [Grid Size] (Type '9' for 3x3, or '25' for 5x5)\")",
+      "string_b": [
+        "36",
+        0
+      ],
+      "delimiter": ""
+    },
+    "class_type": "StringConcatenate",
+    "_meta": {
+      "title": "连接"
+    }
+  },
+  "43": {
+    "inputs": {
+      "preview_markdown": "```json\n{\n  \"image_generation_model\": \"NanoBananaPro\",\n  \"grid_layout\": \"3x3\",\n  \"grid_aspect_ratio\": \"16:9\",\n  \"clean_mode\": true,\n  \"visual_anchors\": {\n    \"character_wanyi\": \"Noble Chinese lady, cold and elegant, wearing dark blue silk with silver embroidery, sharp eyes.\",\n    \"character_su_wanrou\": \"Delicate concubine, pale skin, light pink hanfu, noticeably pregnant, panicked expression.\",\n    \"key_item\": \"Gold and coral butterfly 'Buyao' (hairpin), intricate wings.\",\n    \"setting\": \"Ancient Chinese alleyway (Xinghua Lane) and a green-curtained carriage.\"\n  },\n  \"shots\": [\n    {\n      \"shot_number\": \"Shot_1\",\n      \"prompt_text\": \"[Extreme Wide Shot] + [Symmetrical Center], Ancient Chinese alleyway 'Xinghua Lane', traditional architecture with apricot trees, a lonely green-curtained horse carriage parked outside a courtyard, [Cinematic Chiaroscuro], quiet and oppressive atmosphere, 8k resolution. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n    },\n    {\n      \"shot_number\": \"Shot_2\",\n      \"prompt_text\": \"[Medium Shot] + [Leading Lines], Su Wanrou (delicate woman, pregnant belly visible) panicked and running out of a courtyard gate, holding silk bundles, [Rim Light (Backlight)], hyper-detailed textures, soft natural light. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n    },\n    {\n      \"shot_number\": \"Shot_3\",\n      \"prompt_text\": \"[Extreme Close-up] + [Golden Ratio], Focus on an ornate red coral butterfly hairpin (Buyao) in Su Wanrou's hair, gold wings trembling, [Volumetric Lighting], Unreal Engine 5 Render, macro photography style. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n    },\n    {\n      \"shot_number\": \"Shot_4\",\n      \"prompt_text\": \"[Medium Close-up] + [Depth of Field (Bokeh)], Su Wanrou entering the dark interior of the carriage, struggling slightly with her pregnancy, profile view, [Soft Natural Light], cinematic storytelling. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n    },\n    {\n      \"shot_number\": \"Shot_5\",\n      \"prompt_text\": \"[Wide Shot] + [Symmetrical Center], Flashback transition: Inside the cold Marquis Manor, Wanyi sitting regally on a throne-like chair, looking down with icy authority at kneeling servants, [Mood Lighting], high contrast, photorealistic. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n    },\n    {\n      \"shot_number\": \"Shot_6\",\n      \"prompt_text\": \"[Close-up] + [Low Angle], A man's pale, slender hand reaching out from behind the heavy carriage curtain to support Su Wanrou’s wrist, [Cinematic Chiaroscuro], mysterious and tense, Unreal Engine 5 Render. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n    },\n    {\n      \"shot_number\": \"Shot_7\",\n      \"prompt_text\": \"[Extreme Close-up] + [Macro Texture], Macro shot of the man's hand back, a distinct and jagged healing bite mark scar on the pale skin, [Rim Light (Backlight)], hyper-detailed skin texture, deep shadows. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n    },\n    {\n      \"shot_number\": \"Shot_8\",\n      \"prompt_text\": \"[POV Angle] + [Negative Space], Wanyi's perspective through trembling green leaves and a stone wall, staring at the carriage and the hand, [Depth of Field (Bokeh)], blurred foreground, emotional tension. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n    },\n    {\n      \"shot_number\": \"Shot_9\",\n      \"prompt_text\": \"[Medium Close-up] + [Profile CU], The green carriage curtain falling shut, hiding the occupants, carriage wheels beginning to turn on the cobblestone, [Mood Lighting], dusty and melancholic atmosphere. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n    }\n  ]\n}\n```",
+      "preview_text": "```json\n{\n  \"image_generation_model\": \"NanoBananaPro\",\n  \"grid_layout\": \"3x3\",\n  \"grid_aspect_ratio\": \"16:9\",\n  \"clean_mode\": true,\n  \"visual_anchors\": {\n    \"character_wanyi\": \"Noble Chinese lady, cold and elegant, wearing dark blue silk with silver embroidery, sharp eyes.\",\n    \"character_su_wanrou\": \"Delicate concubine, pale skin, light pink hanfu, noticeably pregnant, panicked expression.\",\n    \"key_item\": \"Gold and coral butterfly 'Buyao' (hairpin), intricate wings.\",\n    \"setting\": \"Ancient Chinese alleyway (Xinghua Lane) and a green-curtained carriage.\"\n  },\n  \"shots\": [\n    {\n      \"shot_number\": \"Shot_1\",\n      \"prompt_text\": \"[Extreme Wide Shot] + [Symmetrical Center], Ancient Chinese alleyway 'Xinghua Lane', traditional architecture with apricot trees, a lonely green-curtained horse carriage parked outside a courtyard, [Cinematic Chiaroscuro], quiet and oppressive atmosphere, 8k resolution. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n    },\n    {\n      \"shot_number\": \"Shot_2\",\n      \"prompt_text\": \"[Medium Shot] + [Leading Lines], Su Wanrou (delicate woman, pregnant belly visible) panicked and running out of a courtyard gate, holding silk bundles, [Rim Light (Backlight)], hyper-detailed textures, soft natural light. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n    },\n    {\n      \"shot_number\": \"Shot_3\",\n      \"prompt_text\": \"[Extreme Close-up] + [Golden Ratio], Focus on an ornate red coral butterfly hairpin (Buyao) in Su Wanrou's hair, gold wings trembling, [Volumetric Lighting], Unreal Engine 5 Render, macro photography style. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n    },\n    {\n      \"shot_number\": \"Shot_4\",\n      \"prompt_text\": \"[Medium Close-up] + [Depth of Field (Bokeh)], Su Wanrou entering the dark interior of the carriage, struggling slightly with her pregnancy, profile view, [Soft Natural Light], cinematic storytelling. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n    },\n    {\n      \"shot_number\": \"Shot_5\",\n      \"prompt_text\": \"[Wide Shot] + [Symmetrical Center], Flashback transition: Inside the cold Marquis Manor, Wanyi sitting regally on a throne-like chair, looking down with icy authority at kneeling servants, [Mood Lighting], high contrast, photorealistic. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n    },\n    {\n      \"shot_number\": \"Shot_6\",\n      \"prompt_text\": \"[Close-up] + [Low Angle], A man's pale, slender hand reaching out from behind the heavy carriage curtain to support Su Wanrou’s wrist, [Cinematic Chiaroscuro], mysterious and tense, Unreal Engine 5 Render. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n    },\n    {\n      \"shot_number\": \"Shot_7\",\n      \"prompt_text\": \"[Extreme Close-up] + [Macro Texture], Macro shot of the man's hand back, a distinct and jagged healing bite mark scar on the pale skin, [Rim Light (Backlight)], hyper-detailed skin texture, deep shadows. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n    },\n    {\n      \"shot_number\": \"Shot_8\",\n      \"prompt_text\": \"[POV Angle] + [Negative Space], Wanyi's perspective through trembling green leaves and a stone wall, staring at the carriage and the hand, [Depth of Field (Bokeh)], blurred foreground, emotional tension. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n    },\n    {\n      \"shot_number\": \"Shot_9\",\n      \"prompt_text\": \"[Medium Close-up] + [Profile CU], The green carriage curtain falling shut, hiding the occupants, carriage wheels beginning to turn on the cobblestone, [Mood Lighting], dusty and melancholic atmosphere. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n    }\n  ]\n}\n```",
+      "previewMode": null,
+      "source": [
+        "41",
+        0
+      ]
+    },
+    "class_type": "PreviewAny",
+    "_meta": {
+      "title": "预览任意"
+    }
+  },
+  "45": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "46",
+        1
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  },
+  "46": {
+    "inputs": {
+      "model": "gemini-3-pro-image-preview",
+      "user_input": [
+        "47",
+        0
+      ],
+      "output_type": "auto",
+      "instruct": "",
+      "aspect_ratio": "9:16",
+      "image_resolution": "1K",
+      "client": [
+        "55",
+        0
+      ]
+    },
+    "class_type": "YunwuGeminiNativeNode",
+    "_meta": {
+      "title": "Yunwu Gemini Native"
+    }
+  },
+  "47": {
+    "inputs": {
+      "string_a": "基于输入的参考图，保持人物角色，画面风格与参考图一致，不要参考传入图片的长宽比，网格长宽比为9：16",
+      "string_b": [
+        "41",
+        0
+      ],
+      "delimiter": ""
+    },
+    "class_type": "StringConcatenate",
+    "_meta": {
+      "title": "连接"
+    }
+  },
+  "49": {
+    "inputs": {
+      "image": "ComfyUI_00011_.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "55": {
+    "inputs": {
+      "api_key": "sk-AtSJNvfYjVQoOUvL1hL4ffFSyM37iMflWwqdrc1MoPmByJsk",
+      "base_url": "https://yunwu.ai/v1"
+    },
+    "class_type": "ModelProviderNode",
+    "_meta": {
+      "title": "Model Provider"
+    }
+  }
+}
