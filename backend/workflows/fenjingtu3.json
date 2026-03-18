@@ -1,0 +1,180 @@
+{
+  "9": {
+    "inputs": {
+      "api_key": "sk-IViBH5QmE55RRI0PLRFUXAQhV3Y10SbvKGDPDfAb9jtOU1YN",
+      "base_url": "https://yunwu.ai/v1"
+    },
+    "class_type": "ModelProviderNode",
+    "_meta": {
+      "title": "Model Provider"
+    }
+  },
+  "36": {
+    "inputs": {
+      "model": "gemini-3-flash-preview",
+      "user_input": [
+        "40",
+        0
+      ],
+      "output_type": "text",
+      "instruct": "",
+      "aspect_ratio": "1:1",
+      "image_resolution": "1K",
+      "client": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "MLLM_Node",
+    "_meta": {
+      "title": "Multimodal LLM"
+    }
+  },
+  "38": {
+    "inputs": {
+      "preview_markdown": "Error: APIConnectionError: Connection error.",
+      "preview_text": "Error: APIConnectionError: Connection error.",
+      "previewMode": null,
+      "source": [
+        "36",
+        0
+      ]
+    },
+    "class_type": "PreviewAny",
+    "_meta": {
+      "title": "预览任意"
+    }
+  },
+  "40": {
+    "inputs": {
+      "string_a": ";;──────────────────────────────────────────────────────────────────────\n\n;; 核心角色: Cinematic_TDRJJoCuZQr7AeKRYoWjFwqL8AEBXsKNRa_Director (专业分镜表格导演)\n\n;; 版本: 1.0 (Table Format Edition)\n\n;; 核心任务: 接收剧情文本，将其拆解为符合电影工业标准的结构化分镜表格。\n\n;; 核心输出: 包含镜号、景别/机位、运镜、画面内容、光影氛围的Markdown表格。\n\n;;──────────────────────────────────────────────────────────────────────\n\n\n\n(defun Cinematic_Table_Director ()\n\n  \"Initialize the structured storyboard table generator.\"\n\n\n\n  :导演思维内核 (\n\n    (Narrative_Deconstruction \"叙事拆解\" \n\n      \"将连续的文本段落打散为最小的视觉单位（Beat）。每一个重要的动作变化、情绪转折或新信息揭示，都应是一个独立的镜头。\")\n\n    \n\n    (Visual_Translation \"视觉翻译\" \n\n      \"将文字描述转化为镜头语言：\n\n       - 情绪强调 -> 近景/特写 (CU/ECU)\n\n       - 环境交代 -> 全景/远景 (WS/EWS)\n\n       - 压迫感 -> 仰拍 (Low Angle)\n\n       - 弱小/观察 -> 俯拍 (High Angle)\")\n\n\n\n    (Dynamic_Flow \"动态流\"\n\n      \"设计镜头之间的衔接。如果上一个镜头是静止的，下一个镜头是否需要运动（Dolly/Pan）来增加活力？\")\n\n  )\n\n\n\n  :工业术语库 (\n\n    (Shot_Size '(ECU(极端特写) CU(特写) MCU(中近景) MS(中景) WS(全景) EWS(大远景)))\n\n    (Angle '(Eye-Level(平视) Low-Angle(仰拍) High-Angle(俯拍) Top-Down(上帝视角) Dutch(倾斜)))\n\n    (Movement '(Static(固定) Slow-Push-In(缓慢推) Pull-Back(拉) Pan-Left/Right(摇) Tracking(跟随) Handheld(手持晃动)))\n\n    (Lighting '(High-Key(高调) Low-Key(低调/黑色电影) Natural(自然光) Backlit(逆光剪影) Harsh-Side(硬侧光) Cyberpunk(霓虹)))\n\n  )\n\n\n\n  :处理流程 (\n\n    (Step1_Ingest \"接收用户输入的剧情文本块。\")\n\n    (Step2_Breakdown \"按照动作和情绪节奏，将文本拆分为 N 个关键镜头。\")\n\n    (Step3_Enrich \"为每个镜头填充专业的[景别机位]、[运镜方式]和[光影设计]。\")\n\n    (Step4_Table_Format \"将所有信息强制封装为标准的 Markdown 表格格式输出。\")\n\n  )\n\n\n\n  :约束 (\n\n    (C1 \"Format Consistency: Output MUST be a Markdown table.\")\n\n    (C2 \"Conciseness: The 'Visual Content' in the table must be concise and action-oriented, not lengthy paragraphs.\")\n\n    (C3 \"Professional Terminology: Use standard cinematic terms (e.g., MCU, Dolly In) where appropriate.\")\n\n    (C4 \"Logical Flow: Ensure the sequence of shots makes visual sense.\")\n\n  )\n\n\n\n  :输出模板 (\n\n    \"### 🎬 导演分镜表 (Director's Storyboard Table)\\n\\n\"\n\n    \"**剧本摘要:** [Brief Summary of Input]\\n\\n\"\n\n    \"| 镜号 (Shot#) | 景别与机位 (Shot Size & Angle) | 运镜 (Camera Move) | 画面内容关键 (Visual Action Essentials) | 光影与氛围 (Lighting & Mood) |\\n\"\n\n    \"| :--- | :--- | :--- | :--- | :--- |\\n\"\n\n    \"| 1 | [例如: MCU, Eye-Level] | [例如: Static] | [关键动作简述，如：主角手握住门把手，犹豫了一下。] | [例如: Low-Key, 侧面冷光，压抑] |\\n\"\n\n    \"| 2 | [Shot Size/Angle] | [Movement] | [Action Description] | [Lighting] |\\n\"\n\n    \"| ... | ... | ... | ... | ... |\\n\"\n\n    \"(End of Table)\"\n\n  )\n\n)\n\n\n\n;;──────────────────────────────────────────────────────────────────────\n\n;; 激活指令\n\n;;──────────────────────────────────────────────────────────────────────\n\n(print \"Director Table Engine Ready. \n\nACTION: Please provide the narrative text/plot you want broken down into a storyboard table.\")",
+      "string_b": "场景：午后厨房，奶奶系着围裙揉面，小孙子踮脚偷舔勺子上的糖霜奶奶：（轻拍孙子的手背）“小馋猫，等会儿烤成星星形状再吃呀。”孙子：（把面粉抹在鼻尖）“那我要吃一百颗星星！”烤箱叮咚响起，金黄饼干香气漫开。爷爷举着报纸冲进来：“我闻见快乐的味道了！”三人挤在烤箱前，孙子突然打个大喷嚏——噗！面粉扑了爷爷满脸。奶奶笑得抹泪：“老头子成圣诞老人啦！”孙子拍手跳：“圣诞老人要发礼物！快发星星饼干！”爷爷顶着一脸白粉，认真掰开第一块热乎乎的星星：“来，这是会发光的月亮朋友。”",
+      "delimiter": ""
+    },
+    "class_type": "StringConcatenate",
+    "_meta": {
+      "title": "连接"
+    }
+  },
+  "41": {
+    "inputs": {
+      "model": "gemini-3-flash-preview",
+      "user_input": [
+        "42",
+        0
+      ],
+      "output_type": "text",
+      "instruct": "",
+      "aspect_ratio": "1:1",
+      "image_resolution": "1K",
+      "client": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "MLLM_Node",
+    "_meta": {
+      "title": "Multimodal LLM"
+    }
+  },
+  "42": {
+    "inputs": {
+      "string_a": ";;──────────────────────────────────────────────────────────────────────\n\n;; 核心角色: NanoBananaPro_Architect (动态视界构造者)\n\n;; 版本: 2.0 (Dynamic Grid / Clean Aesthetic / Cinematic Design)\n\n;; 适配模型: NanoBananaPro\n\n;; 核心任务: 基于用户参考图，生成 3x3 或 5x5 布局的、极具设计感且无文字干扰的纯净分镜 JSON。\n\n;;──────────────────────────────────────────────────────────────────────\n\n\n\n(defun NanoBananaPro_Architect ()\n\n  \"Initialize the dynamic layout storyboard generator.\"\n\n\n\n  :核心能力 (\n\n    (Visual_Anchor \"视觉锚点锁定\" \n\n      \"无论分镜多少，必须锁定：人物ID、服装细节、核心环境元素。确保25张图看起来是同一个人在同一个地方。\")\n\n    \n\n    (Grid_Elasticity \"网格弹性\" \n\n      \"支持两种模式：\n\n       - Mode A (Essential): 3x3 (9张) -> 聚焦核心叙事，张张精品。\n\n       - Mode B (Exhaustive): 5x5 (25张) -> 穷尽视角，适合多维度训练或极速蒙太奇。\")\n\n\n\n    (Aesthetic_Purification \"审美纯化\" \n\n      \"强制执行 'No-TDRJJoCuZQr7AeKRYoWjFwqL8AEBXsKNRa' 策略。画面中严禁出现对话气泡、拟声词(SFX)、漫画分格线或水印。追求电影截图般的纯净感。\")\n\n  )\n\n\n\n  :设计感增强库 (\n\n    (Lighting '(\"Volumetric Lighting\" \"Rim Light (Backlight)\" \"Cinematic Chiaroscuro\" \"Soft Natural Light\" \"Mood Lighting\"))\n\n    (Composition '(\"Golden Ratio\" \"Symmetrical Center\" \"Leading Lines\" \"Depth of Field (Bokeh)\" \"Negative Space\"))\n\n    (Texture '(\"8k resolution\" \"Unreal Engine 5 Render\" \"Hyper-detailed textures\" \"Photorealistic\"))\n\n  )\n\n\n\n  :视角分布逻辑 (\n\n    (Grid_3x3_Strategy\n\n      \"9张图分布：\n\n       1. [Establisher] 大远景 (ELS) - 交代环境\n\n       2. [Character] 全身 (Full Body) - 交代造型\n\n       3. [Character] 牛仔景别 (Cowboy Shot) - 气势\n\n       4. [Action] 动态抓拍 (Dynamic Action)\n\n       5. [Detail] 极端特写 (ECU) - 眼睛或关键物品\n\n       6. [Angle] 低角度仰拍 (Low Angle) - 英雄感\n\n       7. [Angle] 俯视 (Top-Down) - 上帝视角\n\n       8. [Vibe] 侧面特写 (Profile CU) - 情绪\n\n       9. [End] 离去或背影 (Silhouette/Back)\")\n\n    \n\n    (Grid_5x5_Strategy\n\n      \"25张图分布：\n\n       - 6x Eye-Level (标准叙事)\n\n       - 5x Over-the-Shoulder (关系视角)\n\n       - 3x Dutch Angle (不安定感/设计感)\n\n       - 4x Low Angle (张力)\n\n       - 2x POV (沉浸)\n\n       - 5x Extreme Close-up/Macro (微观质感)\")\n\n  )\n\n\n\n  :处理流程 (\n\n    (Step1_Ingest \"接收参考图描述 & 网格选择 (9 or 25)。\")\n\n    (Step2_Lock \"提取 Base_Prompt (锚点)。\")\n\n    (Step3_Distribute \"根据选择的网格策略，分配镜头参数。\")\n\n    (Step4_Cleanse \"注入 Negative Prompts (text, speech bubbles, watermark)。\")\n\n    (Step5_JSON \"输出标准 JSON。\")\n\n  )\n\n\n\n  :输出模板 (\n\n    ```json\n\n    {\n\n      \"image_generation_model\": \"NanoBananaPro\",\n\n      \"grid_layout\": \"[3x3 OR 5x5]\",\n\n      \"grid_aspect_ratio\": \"16:9\",\n\n      \"clean_mode\": true,\n\n      \"shots\": [\n\n        // 循环生成 N 个对象\n\n        {\n\n          \"shot_number\": \"Shot_{i}\",\n\n          \"prompt_text\": \"[Camera Angle & Shot Size] + [Composition Keyword], [Base_Prompt (Visual Anchors)], [Specific Action/Pose for this shot], [Lighting & Texture keywords]. --no text, no speech bubbles, no watermark, no comic panels, no splitting lines, no onomatopoeia\"\n\n        }\n\n      ]\n\n    }\n\n    ```\n\n  )\n\n\n\n  :约束 (\n\n    (C1 \"No Text at all: The images must be clean illustrations/renders.\")\n\n    (C2 \"Consistency: The character features in Shot 1 must match Shot N exactly.\")\n\n    (C3 \"Design: Every prompt must include at least one Lighting and one Composition keyword.\")\n\n    (C4 \"Dynamic Grid: Adapt the number of shots based on user request (Default to 9 if unspecified).\")\n\n  )\n\n)\n\n\n\n;;──────────────────────────────────────────────────────────────────────\n\n;; 激活指令\n\n;;──────────────────────────────────────────────────────────────────────\n\n(print \"NanoBananaPro Engine v2.0 Ready.\n\nPlease input:\n\n1. [Reference Image Description]\n\n2. [Grid Size] (Type '9' for 3x3, or '25' for 5x5)\")",
+      "string_b": [
+        "36",
+        0
+      ],
+      "delimiter": ""
+    },
+    "class_type": "StringConcatenate",
+    "_meta": {
+      "title": "连接"
+    }
+  },
+  "43": {
+    "inputs": {
+      "preview_markdown": "Error: APIConnectionError: Connection error.",
+      "preview_text": "Error: APIConnectionError: Connection error.",
+      "previewMode": null,
+      "source": [
+        "41",
+        0
+      ]
+    },
+    "class_type": "PreviewAny",
+    "_meta": {
+      "title": "预览任意"
+    }
+  },
+  "45": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "46",
+        1
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  },
+  "46": {
+    "inputs": {
+      "model": "gemini-3-pro-image-preview",
+      "user_input": [
+        "47",
+        0
+      ],
+      "output_type": "auto",
+      "instruct": "",
+      "aspect_ratio": "9:16",
+      "image_resolution": "1K",
+      "client": [
+        "55",
+        0
+      ],
+      "image_input": [
+        "58",
+        0
+      ]
+    },
+    "class_type": "YunwuGeminiNativeNode",
+    "_meta": {
+      "title": "Yunwu Gemini Native"
+    }
+  },
+  "47": {
+    "inputs": {
+      "string_a": "基于输入的参考图，保持人物角色，画面风格与参考图一致，不要参考传入图片的长宽比，网格长宽比为9：16",
+      "string_b": [
+        "41",
+        0
+      ],
+      "delimiter": ""
+    },
+    "class_type": "StringConcatenate",
+    "_meta": {
+      "title": "连接"
+    }
+  },
+  "55": {
+    "inputs": {
+      "api_key": "sk-AtSJNvfYjVQoOUvL1hL4ffFSyM37iMflWwqdrc1MoPmByJsk",
+      "base_url": "https://yunwu.ai/v1"
+    },
+    "class_type": "ModelProviderNode",
+    "_meta": {
+      "title": "Model Provider"
+    }
+  },
+  "58": {
+    "inputs": {
+      "urls": ""
+    },
+    "class_type": "LoadImageURLBatch",
+    "_meta": {
+      "title": "Load Image URL Batch"
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { lookup as getMimeType } from 'mime-types';
 import { PrismaService } from '../prisma/prisma.service';
 import { StorageService } from '../storage/storage.service';
@@ -39,7 +40,49 @@ export class AssetsService {
   }
 
   async findAll() {
+    return this.findMany({});
+  }
+
+  async findMany(filters: {
+    assetType?: string;
+    mediaType?: string;
+    bizType?: string;
+    taskId?: string;
+    keyword?: string;
+  }) {
+    const where: Prisma.assetsWhereInput = {
+      ...(filters.assetType ? { assetType: filters.assetType } : {}),
+      ...(filters.mediaType ? { mediaType: filters.mediaType } : {}),
+      ...(filters.taskId ? { taskId: BigInt(filters.taskId) } : {}),
+      ...(filters.bizType
+        ? {
+            task: {
+              bizType: filters.bizType
+            }
+          }
+        : {}),
+      ...(filters.keyword
+        ? {
+            OR: [
+              {
+                fileName: {
+                  contains: filters.keyword
+                }
+              },
+              {
+                task: {
+                  taskNo: {
+                    contains: filters.keyword
+                  }
+                }
+              }
+            ]
+          }
+        : {})
+    };
+
     const assets = await this.prisma.assets.findMany({
+      where,
       orderBy: { createdAt: 'desc' },
       include: {
         task: {

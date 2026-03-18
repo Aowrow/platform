@@ -332,6 +332,9 @@ export class TasksService {
     const taskNo = `TASK${Date.now()}`;
     const workflow = await loadFeatureWorkflow(feature.workflowFile);
     const prompt = feature.applyInputParams(structuredClone(workflow), dto.inputParams);
+    const referenceImageIds = Array.isArray(dto.inputParams.referenceImageIds)
+      ? dto.inputParams.referenceImageIds.map((item) => String(item)).filter(Boolean)
+      : [];
     const createdTask = await this.prisma.tasks.create({
       data: {
         taskNo,
@@ -364,6 +367,21 @@ export class TasksService {
       dto.inputParams as Prisma.InputJsonValue,
       'queued'
     );
+
+    if (referenceImageIds.length > 0) {
+      await this.prisma.assets.updateMany({
+        where: {
+          id: {
+            in: referenceImageIds.map((id) => BigInt(id))
+          },
+          userId: defaultUser.id,
+          assetType: 'input'
+        },
+        data: {
+          taskId: createdTask.id
+        }
+      });
+    }
 
     try {
       const submitResult = await this.comfyuiService.submitTask({ prompt });

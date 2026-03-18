@@ -4,7 +4,7 @@ import { join } from 'node:path';
 export type FeatureField = {
   key: string;
   label: string;
-  type: 'text' | 'textarea' | 'select';
+  type: 'text' | 'textarea' | 'select' | 'assetImage';
   placeholder?: string;
   required?: boolean;
   description?: string;
@@ -73,8 +73,15 @@ const featureRegistry: FeatureDefinition[] = [
     description: '输入剧情文本后快速生成分镜图，适合不熟悉底层工作流的新手直接使用。',
     taskType: 'image',
     resultType: 'image_group',
-    workflowFile: 'fenjingtu.json',
+    workflowFile: 'fenjingtu3.json',
     fields: [
+      {
+        key: 'referenceImages',
+        label: '参考图片',
+        type: 'assetImage',
+        required: false,
+        description: '可选择一张或多张已上传图片，平台会把图片 URL 注入工作流中的 Load Image URL Batch 节点。'
+      },
       {
         key: 'storyText',
         label: '剧情文本',
@@ -117,6 +124,9 @@ const featureRegistry: FeatureDefinition[] = [
       const visualStyle = String(inputParams.visualStyle || '电影感、角色统一、镜头连贯、氛围完整');
       const layoutMode = String(inputParams.layoutMode || '3x3');
       const outputRatio = String(inputParams.outputRatio || '9:16');
+      const referenceImageUrls = Array.isArray(inputParams.referenceImageUrls)
+        ? inputParams.referenceImageUrls.map((item) => String(item)).filter(Boolean)
+        : [];
       const storyboardPrompt = `${storyText}\n\n分镜布局：${layoutMode}。请保持角色、服装、场景、光影前后一致。`;
       const finalPromptSuffix = ` 整体视觉风格：${visualStyle}。分镜布局：${layoutMode}。网格长宽比：${outputRatio}。`;
 
@@ -124,7 +134,56 @@ const featureRegistry: FeatureDefinition[] = [
       setNodeInputValue(workflow, '46', 'aspect_ratio', outputRatio);
       setNodeInputValue(workflow, '45', 'filename_prefix', `platform/fenjingtu/${Date.now()}`);
       appendNodeInputValue(workflow, '47', 'string_a', finalPromptSuffix);
+      setNodeInputValue(workflow, '58', 'urls', referenceImageUrls.join(';'));
       setProviderConfig(workflow, ['9', '55']);
+
+      return workflow;
+    }
+  },
+  {
+    code: 'fenjingtu-splitter',
+    name: '分镜图分割',
+    description: '输入一张分镜图，按指定行列数做简单分割处理。',
+    taskType: 'image',
+    resultType: 'image_group',
+    workflowFile: 'fenjingtuSplitter.json',
+    fields: [
+      {
+        key: 'referenceImages',
+        label: '分镜图图片',
+        type: 'assetImage',
+        required: true,
+        description: '请选择一张已上传的分镜图，平台会把它同步到工作流中的 LoadImage 节点。'
+      },
+      {
+        key: 'rows',
+        label: '行数',
+        type: 'text',
+        defaultValue: '3',
+        placeholder: '例如：3'
+      },
+      {
+        key: 'columns',
+        label: '列数',
+        type: 'text',
+        defaultValue: '3',
+        placeholder: '例如：3'
+      }
+    ],
+    applyInputParams(workflow, inputParams) {
+      const referenceImageUrls = Array.isArray(inputParams.referenceImageUrls)
+        ? inputParams.referenceImageUrls.map((item) => String(item)).filter(Boolean)
+        : [];
+      const rows = Math.max(1, Number(inputParams.rows || 3));
+      const columns = Math.max(1, Number(inputParams.columns || 3));
+
+      if (referenceImageUrls.length === 0) {
+        throw new Error('fenjingtu-splitter requires at least one reference image URL.');
+      }
+
+      setNodeInputValue(workflow, '31', 'url', referenceImageUrls[0]);
+      workflow['18'].inputs.rows = rows;
+      workflow['18'].inputs.columns = columns;
 
       return workflow;
     }

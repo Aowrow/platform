@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 const navItems = [
   { href: '/', label: '能力首页' },
   { href: '/features/fenjingtu', label: '分镜图' },
+  { href: '/features/fenjingtu-splitter', label: '分镜图分割' },
   { href: '/assets', label: '资产管理' },
   { href: '/settings', label: '系统配置' }
 ];

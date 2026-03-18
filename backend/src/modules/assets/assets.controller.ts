@@ -2,6 +2,7 @@ import {
   Controller,
   Delete,
   Get,
+  Query,
   Param,
   Post,
   Res,
@@ -23,8 +24,20 @@ export class AssetsController {
   ) {}
 
   @Get()
-  findAll() {
-    return this.assetsService.findAll();
+  findAll(
+    @Query('assetType') assetType?: string,
+    @Query('mediaType') mediaType?: string,
+    @Query('bizType') bizType?: string,
+    @Query('taskId') taskId?: string,
+    @Query('keyword') keyword?: string
+  ) {
+    return this.assetsService.findMany({
+      assetType,
+      mediaType,
+      bizType,
+      taskId,
+      keyword
+    });
   }
 
   @Get('debug/summary')

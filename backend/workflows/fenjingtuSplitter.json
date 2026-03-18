@@ -1,0 +1,38 @@
+{
+  "18": {
+    "inputs": {
+      "rows": 3,
+      "columns": 3,
+      "image": [
+        "31",
+        0
+      ]
+    },
+    "class_type": "ImageStoryboardSplitter",
+    "_meta": {
+      "title": "Image Storyboard Splitter"
+    }
+  },
+  "31": {
+    "inputs": {
+      "url": "https://img.shetu66.com/2023/04/27/1682576769453692.png"
+    },
+    "class_type": "LoadImageURL",
+    "_meta": {
+      "title": "Load Image URL"
+    }
+  },
+  "32": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "18",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  }
+}

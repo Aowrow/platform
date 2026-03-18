@@ -1,0 +1,59 @@
+{
+  "29": {
+    "inputs": {
+      "prompt": "动画流畅",
+      "model": "veo3.1",
+      "aspect_ratio": "9:16",
+      "enhance_prompt": true,
+      "enable_upsample": true,
+      "base_url": "https://yunwu.ai",
+      "api_key": "sk-eud2BWOXtajZzoDRs2knOj8Y6IH73H9h1Yk6SG2fCeVeg74B",
+      "http_timeout_s": 120,
+      "poll_interval_s": 6,
+      "poll_timeout_s": 2400,
+      "image_input": [
+        "31",
+        0
+      ]
+    },
+    "class_type": "VeoVideoSingleInput_URL",
+    "_meta": {
+      "title": "veo video single input -> URL"
+    }
+  },
+  "31": {
+    "inputs": {
+      "urls": "https://filesystem.site/cdn/20250612/VfgB5ubjInVt8sG6rzMppxnu7gEfde.png;https://filesystem.site/cdn/20250612/998IGmUiM2koBGZM3UnZeImbPBNIUL.png"
+    },
+    "class_type": "LoadImageURLBatch",
+    "_meta": {
+      "title": "Load Image URL Batch"
+    }
+  },
+  "33": {
+    "inputs": {
+      "video_urls": [
+        "29",
+        0
+      ],
+      "save_path": "output",
+      "http_timeout_s": 120
+    },
+    "class_type": "VideoDownloadNode",
+    "_meta": {
+      "title": "Video Download"
+    }
+  },
+  "35": {
+    "inputs": {
+      "value": [
+        "33",
+        0
+      ]
+    },
+    "class_type": "PrimitiveString",
+    "_meta": {
+      "title": "字符串"
+    }
+  }
+}
